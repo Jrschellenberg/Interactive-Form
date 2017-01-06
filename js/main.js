@@ -3,6 +3,8 @@
  */
 jQuery(function ($) {
 
+	$.validate();
+
 	//Creating textInput element for the other selection
 	var textInput = $("<input type='text' placeholder='Your job role'>");
 	textInput.hide();
@@ -13,7 +15,17 @@ jQuery(function ($) {
 	var totalAmountSelected = 0;
 	var totalOutput = $("<label>Total : $<span id='totalAmount'>"+totalAmountSelected+"</span></label>");
 	$(".activities").append(totalOutput);
-	var timesArray = [];
+
+
+	//Putting the payment options into an array to be used with the hideshowOptions function.
+	var paymentArray = [];
+	paymentArray[0] = $("#credit-card");
+	paymentArray[1] = $("#credit-card").next();
+	paymentArray[2] = $("#credit-card").next().next();
+
+	//Hiding all payment options on pageload.
+	hideShowOptions(paymentArray, -1);
+
 
 
 
@@ -55,6 +67,28 @@ jQuery(function ($) {
 			colorElement.hide();
 			console.log("other....");
 		}
+	});
+
+	$("#payment").change(function(){
+		var optionSelected = $("#payment option:selected").val();
+
+		console.log(paymentArray);
+
+		if(optionSelected == "credit card"){
+			hideShowOptions(paymentArray, 0);
+		}
+		else if(optionSelected == "paypal"){
+			hideShowOptions(paymentArray, 1);
+		}
+		else if(optionSelected == "bitcoin"){
+			hideShowOptions(paymentArray, 2);
+		}
+		else{
+			//if the 3 options aren't selected. Hide all options.
+			hideShowOptions(paymentArray, -1);
+		}
+
+
 	});
 
 	$(".activities label").change(function(){
@@ -101,7 +135,6 @@ jQuery(function ($) {
 		//checking if clicked, if being clicked add to total, else remove from total.
 		if(isClicked){
 			totalAmountSelected+= moneyValue;
-			timesArray.push(timeString);
 		}
 		else{
 			totalAmountSelected-= moneyValue;
@@ -130,4 +163,18 @@ jQuery(function ($) {
 		$("#color option:nth-child("+secondN+")").attr("selected","selected");
 		$("#color option:nth-child("+formula+")").css("display","none");
 	}
+
+
+	function hideShowOptions(array, showIndex){
+		for(var i=0; i<array.length; i++){
+			if(i==showIndex){
+				array[i].show();
+			}
+			else{
+				array[i].hide();
+			}
+		}
+	}
+
+
 });
