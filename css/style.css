@@ -179,3 +179,7 @@ button:hover {
 		width: 49%;
 	}
 }
+
+.has-error{
+	color:darkred;
+}

@@ -3,7 +3,13 @@
  */
 jQuery(function ($) {
 
-	$.validate();
+	$.validate({
+		modules : 'security', //Adding the module for creditcard Validation
+		validateOnBlur : true, // disable validation when input looses focus
+		errorMessagePosition : 'top', // Instead of 'inline' which is default
+		scrollToTopOnError : true // Set this property to true on longer forms
+
+	});
 
 	//Creating textInput element for the other selection
 	var textInput = $("<input type='text' placeholder='Your job role'>");
