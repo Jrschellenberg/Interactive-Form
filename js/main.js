@@ -13,6 +13,7 @@ jQuery(function ($) {
 	var totalAmountSelected = 0;
 	var totalOutput = $("<label>Total : $<span id='totalAmount'>"+totalAmountSelected+"</span></label>");
 	$(".activities").append(totalOutput);
+	var timesArray = [];
 
 
 
@@ -57,24 +58,61 @@ jQuery(function ($) {
 	});
 
 	$(".activities label").change(function(){
+
+		var str = $(this).text();
+		var timeString = getSubString(str);
+
+		if($(this).children().is(":checked"))
+		{
+			enableDisableCheckboxes(true);
+		}else{
+			enableDisableCheckboxes(false);
+		}
+
+		/*
+		A function to give checkboxes the disabled or enabled attribute based on the
+		time contained within their string
+		disableBox, Boolean: if true will disable the boxes, if false will disable the boxes.
+		 */
+		function enableDisableCheckboxes(disableBox){
+			$(".activities input[type=checkbox]").each(function () {
+				var isChecked = $(this).is(":checked");
+				var str = $(this).closest("label").text();
+				var comparedTimeString = getSubString(str);
+				if (!isChecked) {
+					if (comparedTimeString == timeString) {
+						$(this).prop("disabled", disableBox);
+					}
+				}
+			});
+		}
+
+
+
 		//Splitting the String of the currently clicked label element at the $,
 		//limiting to only 2 array values
-		var array = $(this).text().split('$', 2);
+		var moneyArray = $(this).text().split('$', 2);
 		//grabbing the second array value, the one that holds the $ integer then parsing
 		//the string to an integer to base 10.
-		var moneyValue = parseInt(array[1], 10);
+		var moneyValue = parseInt(moneyArray[1], 10);
 		//Setting variable to determine if checkbox is clicked or not.
 		var isClicked = $(this).children().is(":checked");
 
 		//checking if clicked, if being clicked add to total, else remove from total.
 		if(isClicked){
 			totalAmountSelected+= moneyValue;
+			timesArray.push(timeString);
 		}
 		else{
 			totalAmountSelected-= moneyValue;
 		}
 		$("#totalAmount").text(totalAmountSelected);
 	});
+
+	function getSubString(str){
+		return str.substring(str.lastIndexOf("— ")+1, str.lastIndexOf(","));
+	}
+
 
 
 
