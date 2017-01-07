@@ -3,11 +3,30 @@
  */
 jQuery(function ($) {
 
+	$.formUtils.addValidator({
+		name : 'checkboxes',
+		validatorFunction : function(value, $el, config, language, $form) {
+			return $('input[type="checkbox"]:checked').length > 0;
+		},
+		errorMessage : 'You need to select at least one checkbox',
+		errorMessageKey: 'uncheckedBox'
+	});
+
+	$.formUtils.addValidator({
+		name : 'shirtSelected',
+		validatorFunction : function(value, $el, config, language, $form) {
+			return $('#design').val() == "js puns" || $('#design').val() == "heart js";
+		},
+		errorMessage : 'Dont forget to pick a T-Shirt',
+		errorMessageKey: 'noShirtSelected'
+	});
+
+
 	$.validate({
 		modules : 'security', //Adding the module for creditcard Validation
 		validateOnBlur : true, // disable validation when input looses focus
 		errorMessagePosition : 'top', // Instead of 'inline' which is default
-		scrollToTopOnError : true // Set this property to true on longer forms
+		scrollToTopOnError : true, // Set this property to true on longer forms
 
 	});
 
@@ -71,7 +90,6 @@ jQuery(function ($) {
 		else{
 			//hide the color element
 			colorElement.hide();
-			console.log("other....");
 		}
 	});
 

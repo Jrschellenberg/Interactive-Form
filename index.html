@@ -20,11 +20,14 @@
         <fieldset>
             <legend>Basic Info</legend>
 
-            <label for="name">Name:</label>
-            <input type="text" id="name" name="user_name" autofocus>
+            <label for="name">Name: </label>
+            <input type="text" id="name" name="user_name" autofocus data-validation="required"
+                   data-validation-error-msg="(please provide your name)" data-validation-error-msg-container="label[for='name']">
 
-            <label for="mail">Email:</label>
-            <input type="email" id="mail" name="user_email">
+            <label for="mail">Email: </label>
+            <input type="email" id="mail" name="user_email"
+                   data-validation="email" data-validation-error-msg="(please provide a valid email address)"
+                   data-validation-error-msg-container="label[for='mail']">
 
             <label for="title">Job Role</label>
             <select id="title" name="user_title">
@@ -38,7 +41,7 @@
         </fieldset>
 
         <fieldset class="shirt">
-            <legend>T-Shirt Info</legend>
+            <legend>T-Shirt Info </legend>
 
             <div>
                 <label for="size">Size:</label>
@@ -52,7 +55,8 @@
 
             <div>
                 <label for="design">Design:</label>
-                <select id="design" name="user_design">
+                <select id="design" name="user_design" data-validation="shirtSelected"
+                        data-validation-error-msg-container=".shirt legend">
                     <option>Select Theme</option>
                     <option value="js puns">Theme - JS Puns</option>
                     <option value="heart js">Theme - I &#9829; JS</option>
@@ -73,14 +77,21 @@
         </fieldset>
 
         <fieldset class="activities">
-            <legend>Register for Activities</legend>
-            <label><input type="checkbox" name="all"> Main Conference — $200</label>
-            <label><input type="checkbox" name="js-frameworks"> JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100</label>
-            <label><input type="checkbox" name="js-libs"> JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100</label>
-            <label><input type="checkbox" name="express"> Express Workshop — Tuesday 9am-12pm, $100</label>
-            <label><input type="checkbox" name="node"> Node.js Workshop — Tuesday 1pm-4pm, $100</label>
-            <label><input type="checkbox" name="build-tools"> Build tools Workshop — Wednesday 9am-12pm, $100</label>
-            <label><input type="checkbox" name="npm"> npm Workshop — Wednesday 1pm-4pm, $100</label>
+            <legend>Register for Activities </legend>
+            <label><input type="checkbox" name="all" data-validation="checkboxes"
+                          data-validation-error-msg-container=".activities legend"> Main Conference — $200</label>
+            <label><input type="checkbox" name="js-frameworks" data-validation="checkboxes"
+                          data-validation-error-msg-container=".activities legend"> JavaScript Frameworks Workshop — Tuesday 9am-12pm, $100</label>
+            <label><input type="checkbox" name="js-libs" data-validation="checkboxes"
+                          data-validation-error-msg-container=".activities legend"> JavaScript Libraries Workshop — Tuesday 1pm-4pm, $100</label>
+            <label><input type="checkbox" name="express" data-validation="checkboxes"
+                          data-validation-error-msg-container=".activities legend"> Express Workshop — Tuesday 9am-12pm, $100</label>
+            <label><input type="checkbox" name="node" data-validation="checkboxes"
+                          data-validation-error-msg-container=".activities legend"> Node.js Workshop — Tuesday 1pm-4pm, $100</label>
+            <label><input type="checkbox" name="build-tools" data-validation="checkboxes"
+                          data-validation-error-msg-container=".activities legend"> Build tools Workshop — Wednesday 9am-12pm, $100</label>
+            <label><input type="checkbox" name="npm" data-validation="checkboxes"
+                          data-validation-error-msg-container=".activities legend"> npm Workshop — Wednesday 1pm-4pm, $100</label>
 
         </fieldset>
         <fieldset>
@@ -98,17 +109,26 @@
 
                 <div class="col-6 col">
                     <label for="cc-num">Card Number:</label>
-                    <input id="cc-num" name="user_cc-num" type="text">
+                    <input id="cc-num" name="user_cc-num" type="text" data-validation="creditcard"
+                           data-validation-allowing="visa, mastercard" data-validation-depends-on="user_payment"
+                           data-validation-depends-on-value="credit card"
+                           data-validation-error-msg-container="label[for='cc-num']" data-validation-length="16">
                 </div>
 
                 <div class="col-3 col">
-                    <label for="zip">Zip Code:</label>
-                    <input id="zip" name="user_zip" type="text">
+                    <label for="zip">Zip Code: </label>
+                    <input id="zip" name="user_zip" type="text" data-validation="number length" data-validation-length="5"
+                           data-validation-error-msg="(please enter valid zip)" data-validation-depends-on="user_payment"
+                           data-validation-depends-on-value="credit card"
+                           data-validation-error-msg-container="label[for='zip']" data-validation-length="5">
                 </div>
 
                 <div class="col-3 col">
                     <label for="cvv">CVV:</label>
-                    <input id="cvv" name="user_cvv" type="text">
+                    <input id="cvv" name="user_cvv" type="text" data-validation="cvv"
+                           data-validation-depends-on="user_payment"
+                           data-validation-depends-on-value="credit card"
+                           data-validation-error-msg-container="label[for='cvv']" data-validation-length="3">
                 </div>
 
                 <label for="exp-month">Expiration Date:</label>
