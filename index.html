@@ -55,9 +55,10 @@
 
             <div>
                 <label for="design">Design:</label>
-                <select id="design" name="user_design" data-validation="shirtSelected"
+                <select id="design" name="user_design" data-validation="required"
+                        data-validation-error-msg="Dont forget to pick a T-Shirt"
                         data-validation-error-msg-container=".shirt legend">
-                    <option>Select Theme</option>
+                    <option value="">Select Theme</option>
                     <option value="js puns">Theme - JS Puns</option>
                     <option value="heart js">Theme - I &#9829; JS</option>
                 </select>
