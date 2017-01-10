@@ -180,6 +180,9 @@ button:hover {
 	}
 }
 
+/* ============================
+	Added Styles
+==============================*/
 .has-error{
 	color:darkred;
 }
